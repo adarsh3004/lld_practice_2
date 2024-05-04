@@ -2,6 +2,11 @@ package practice.behavioral_pattern.template_method_pattern;
 
 public class TwitterNetwork extends Network{
 
+    public TwitterNetwork(String username, String pwd) {
+        this.username = username;
+        this.pwd = pwd;
+    }
+
     @Override
     boolean validate(String message) {
         System.out.println("Validating message : " + message + " for twitter app");
@@ -15,7 +20,7 @@ public class TwitterNetwork extends Network{
         System.out.println("Posting message : " + message + " for twitter app");
     }
 
-    void login(String username, String pwd) {
+    public void login(String username, String pwd) {
         System.out.println("Logging in with twitter login process with username = " + username + " and password = " + pwd);
     }
 }

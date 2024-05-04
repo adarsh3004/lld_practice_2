@@ -3,8 +3,13 @@ package practice.behavioral_pattern.template_method_pattern;
 
 public class FacebookNetwork extends Network {
 
+    public FacebookNetwork(String username, String pwd) {
+        this.username = username;
+        this.pwd = pwd;
+    }
+
     @Override
-    boolean validate(String message) {
+    public boolean validate(String message) {
         System.out.println("Validating message : " + message + " for facebook app");
         if(message == null)
             return false;
@@ -12,7 +17,7 @@ public class FacebookNetwork extends Network {
     }
 
     @Override
-    void postData(String message) {
+    public void postData(String message) {
         System.out.println("Posting message : " + message + " for facebook app");
     }
 }

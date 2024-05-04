@@ -5,7 +5,7 @@ public abstract class Network {
     String username;
     String pwd;
 
-    final void post(String message) {
+    public final void post(String message) {
         login(username,pwd);
         if(validate(message)) {
             postData(message);
@@ -13,14 +13,14 @@ public abstract class Network {
         logout(username);
     }
 
-    void login(String username, String pwd) {
+    public void login(String username, String pwd) {
         System.out.println("Logging in with default login process with username = " + username + " and password = " + pwd);
     }
 
     abstract boolean validate(String message);
     abstract void postData(String message);
 
-    void logout(String username) {
+   public void logout(String username) {
         System.out.println("Logging out with default logout process, username = " + username);
     }
 }

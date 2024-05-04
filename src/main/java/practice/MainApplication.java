@@ -12,6 +12,9 @@ import practice.behavioral_pattern.command_pattern.commands.LightOffCommand;
 import practice.behavioral_pattern.command_pattern.commands.LightOnCommand;
 import practice.behavioral_pattern.command_pattern.receiver.Fan;
 import practice.behavioral_pattern.command_pattern.receiver.Light;
+import practice.behavioral_pattern.template_method_pattern.FacebookNetwork;
+import practice.behavioral_pattern.template_method_pattern.TwitterNetwork;
+import practice.behavioral_pattern.template_method_pattern.WhatsappNetwork;
 import practice.structural_pattern.adapter_pattern.JsonToXmlAdapter;
 import practice.structural_pattern.adapter_pattern.WebClient;
 import practice.structural_pattern.adapter_pattern.adaptee.JsonClass;
@@ -20,7 +23,6 @@ import practice.structural_pattern.adapter_pattern.client_interface.XmlClass;
 import practice.structural_pattern.decorator_pattern.base.Farmhouse;
 import practice.structural_pattern.decorator_pattern.base.PizzaComponent;
 import practice.structural_pattern.decorator_pattern.decorator.Cheese;
-import practice.structural_pattern.decorator_pattern.decorator.Veggies;
 import practice.creational_patterm.factory_pattern.*;
 import practice.behavioral_pattern.observer_pattern.*;
 import practice.behavioral_pattern.observer_pattern.weather_publisher.EuropeWeatherPublisher;
@@ -50,8 +52,8 @@ public class MainApplication {
         observerPatterRun();
         System.out.println("\n ---- running command pattern ------\n");
         commandPatternRun();
-//        System.out.println("\n ---- running template pattern ------\n");
-//        templatePatternRun();
+        System.out.println("\n ---- running template pattern ------\n");
+        templatePatternRun();
 
         /** Structural Design Pattern Test */
         System.out.println("\n ---- running decorator pattern ------\n");
@@ -102,9 +104,20 @@ public class MainApplication {
 
     }
 
-//    public static void commandPatternRun() {
-//
-//    }
+    public static void templatePatternRun() {
+        FacebookNetwork facebookNetwork = new FacebookNetwork("Adarsh","1234");
+        facebookNetwork.post("Hello World");
+        System.out.println();
+
+        WhatsappNetwork whatsappNetwork = new WhatsappNetwork("Adarsh","1234");
+        whatsappNetwork.post("Hello from whatsapp");
+        whatsappNetwork.post("Hi");
+        System.out.println();
+
+        TwitterNetwork twitterNetwork = new TwitterNetwork("Adarsh","1234");
+        twitterNetwork.post("Hello from twitter");
+        System.out.println();
+    }
 
     public static void strategyPatterRun() {
         StrategyConstructor strategyConstructor = new StrategyConstructor();
