@@ -1,0 +1,31 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.8'
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.springframework.boot:spring-boot-dependencies:2.7.8')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    compileOnly("org.projectlombok:lombok:1.18.12")
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -1,0 +1,15 @@
+
+r
+java:S1450
+"PRemove the "x" field and declare it as a local variable in the relevant methods.(ĞÇñüÿÿÿÿ8Ï¬ûòğ1
+r
+java:S1450"PRemove the "y" field and declare it as a local variable in the relevant methods.(Ê€ÄŒøÿÿÿÿ8Ğ¬ûòğ1
+i
+java:S2975"SRemove this "clone" implementation; use a copy constructor or copy factory instead.(ïšõ¤
+^
+java:S1182"HUse super.clone() to create and seed the cloned instance to be returned.(ïšõ¤
+G
+java:S1068
+"%Remove this unused "x" private field.(ĞÇñüÿÿÿÿ8×¬ûòğ1
+G
+java:S1068"%Remove this unused "y" private field.(Ê€ÄŒøÿÿÿÿ8Ø¬ûòğ1
