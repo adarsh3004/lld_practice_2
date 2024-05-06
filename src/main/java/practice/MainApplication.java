@@ -12,6 +12,11 @@ import practice.behavioral_pattern.command_pattern.commands.LightOffCommand;
 import practice.behavioral_pattern.command_pattern.commands.LightOnCommand;
 import practice.behavioral_pattern.command_pattern.receiver.Fan;
 import practice.behavioral_pattern.command_pattern.receiver.Light;
+import practice.behavioral_pattern.iterator_pattern.Profile;
+import practice.behavioral_pattern.iterator_pattern.aggregate.Facebook;
+import practice.behavioral_pattern.iterator_pattern.aggregate.Linkedin;
+import practice.behavioral_pattern.iterator_pattern.aggregate.SocialNetwork;
+import practice.behavioral_pattern.iterator_pattern.iterator.ProfileIterator;
 import practice.behavioral_pattern.template_method_pattern.FacebookNetwork;
 import practice.behavioral_pattern.template_method_pattern.TwitterNetwork;
 import practice.behavioral_pattern.template_method_pattern.WhatsappNetwork;
@@ -54,6 +59,8 @@ public class MainApplication {
         commandPatternRun();
         System.out.println("\n ---- running template pattern ------\n");
         templatePatternRun();
+        System.out.println("\n ---- running iterator pattern ------\n");
+        iteratorPatternRun();
 
         /** Structural Design Pattern Test */
         System.out.println("\n ---- running decorator pattern ------\n");
@@ -72,6 +79,27 @@ public class MainApplication {
 
     }
 
+    public static void iteratorPatternRun() {
+        List<Profile> data = new ArrayList<Profile>();
+        data.add(new Profile("Adarsh","mail1@gmail.com","Male","Y"));
+        data.add(new Profile("Random1","mail1@gmail.com","Female","Y"));
+        data.add(new Profile("Random2","mail1@gmail.com","Female","N"));
+        data.add(new Profile("Random3","mail1@gmail.com","Male","N"));
+        data.add(new Profile("Random4","mail1@gmail.com","Male","Y"));
+
+        SocialNetwork facebook = new Facebook(data);
+        SocialNetwork linkedin = new Linkedin(data);
+
+        ProfileIterator profileIterator = facebook.createIterator();
+        while (profileIterator.hasNext()) {
+            System.out.println(" Facebook Profile : " + profileIterator.getNext().getUsername());
+        }
+
+        profileIterator = linkedin.createIterator();
+        while (profileIterator.hasNext()) {
+            System.out.println(" Linkedin Profile : " + profileIterator.getNext().getUsername());
+        }
+    }
     public static void commandPatternRun() {
 
         Controller controller;
