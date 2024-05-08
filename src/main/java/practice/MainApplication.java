@@ -17,6 +17,7 @@ import practice.behavioral_pattern.iterator_pattern.aggregate.Facebook;
 import practice.behavioral_pattern.iterator_pattern.aggregate.Linkedin;
 import practice.behavioral_pattern.iterator_pattern.aggregate.SocialNetwork;
 import practice.behavioral_pattern.iterator_pattern.iterator.ProfileIterator;
+import practice.behavioral_pattern.state_pattern.context.GumballMachine;
 import practice.behavioral_pattern.template_method_pattern.FacebookNetwork;
 import practice.behavioral_pattern.template_method_pattern.TwitterNetwork;
 import practice.behavioral_pattern.template_method_pattern.WhatsappNetwork;
@@ -61,6 +62,8 @@ public class MainApplication {
         templatePatternRun();
         System.out.println("\n ---- running iterator pattern ------\n");
         iteratorPatternRun();
+        System.out.println("\n ---- running State pattern ------\n");
+        statePatternRun();
 
         /** Structural Design Pattern Test */
         System.out.println("\n ---- running decorator pattern ------\n");
@@ -76,6 +79,31 @@ public class MainApplication {
         System.out.println("\n ---- running prototype pattern ------\n");
         prototypePattern();
 
+
+    }
+
+    public static void statePatternRun() {
+
+        GumballMachine gumballMachine = new GumballMachine(5);
+
+        gumballMachine.insertQuarter();
+        gumballMachine.turnCrank();
+        gumballMachine.printState();
+
+        gumballMachine.insertQuarter();
+        gumballMachine.ejectQuarter();
+        gumballMachine.printState();
+
+        gumballMachine.ejectQuarter();
+        gumballMachine.printState();
+
+        gumballMachine.turnCrank();
+        gumballMachine.printState();
+
+        gumballMachine.insertQuarter();
+        gumballMachine.turnCrank();
+        gumballMachine.turnCrank();
+        gumballMachine.printState();
 
     }
 
