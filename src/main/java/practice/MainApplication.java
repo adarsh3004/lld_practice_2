@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
+import practice.key_value_store.exception.InvalidKeyException;
+import practice.key_value_store.model.Value;
+import practice.key_value_store.service.KeyValueStoreService;
 import practice.parking_lot.enums.VehicleType;
 import practice.parking_lot.exception.InvalidInputException;
 import practice.parking_lot.exception.SpotNotFoundException;
@@ -14,7 +17,9 @@ import practice.parking_lot.model.Car;
 import practice.parking_lot.service.ParkingService;
 import practice.parking_lot.strategy.ParkingStrategy;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @SpringBootApplication
 public class MainApplication {
@@ -26,7 +31,62 @@ public class MainApplication {
         patternPracticeDryRun.run();
 
         parkingSpotDryRun();
+
+        keyValueStoreRun();
     }
+
+    public static void keyValueStoreRun() throws InvalidKeyException {
+        KeyValueStoreService keyValueStoreService = new KeyValueStoreService();
+
+        // Put
+        Value vl = new Value("title","SDE-Bootcamp");
+        Value vl1 = new Value("price",3000.0);
+        Value vl2 = new Value("enrolled",false);
+        Value vl3 = new Value("estimated_time",30);
+        List<Value> lst = new ArrayList<>(Arrays.asList(vl, vl1, vl2, vl3));
+        keyValueStoreService.put("sde_bootcamp",lst);
+        // get
+        System.out.println(keyValueStoreService.get("sde_bootcamp"));
+        //keys
+        System.out.println(keyValueStoreService.keys());
+
+
+
+        // Put
+        vl = new Value("title","SDE-Kickstart");
+        vl1 = new Value("price",4000.0);
+        vl2 = new Value("enrolled",true);
+        vl3 = new Value("estimated_time",8);
+        lst = new ArrayList<>(Arrays.asList(vl, vl1, vl2, vl3));
+        keyValueStoreService.put("sde_kickstart",lst);
+        // get
+        System.out.println(keyValueStoreService.get("sde_kickstart"));
+        //keys
+        System.out.println(keyValueStoreService.keys());
+
+
+        //delete
+        keyValueStoreService.delete("sde_bootcamp");
+        // get
+        System.out.println(keyValueStoreService.get("sde_bootcamp"));
+        //keys
+        System.out.println(keyValueStoreService.keys());
+
+
+        // Put
+        vl = new Value("title","SDE-Bootcamp");
+        vl1 = new Value("price",30000.0);
+        vl2 = new Value("enrolled",true);
+        vl3 = new Value("estimated_time",30);
+        lst = new ArrayList<>(Arrays.asList(vl, vl1, vl2, vl3));
+        keyValueStoreService.put("sde_bootcamp",lst);
+
+        // search
+        System.out.println(keyValueStoreService.search("price",30000.0));
+        // search
+        System.out.println(keyValueStoreService.search("enrolled",true));
+    }
+
 
     public static void parkingSpotDryRun() throws InvalidInputException, SpotNotFoundException {
 
