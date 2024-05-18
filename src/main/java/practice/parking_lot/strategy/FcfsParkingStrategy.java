@@ -12,8 +12,10 @@ public class FcfsParkingStrategy implements ParkingStrategy{
 
         for(ParkingSpot parkingSpot : parkingLot.getParkingSpotList()) {
             if(vehicle.getVehicleType().equals(parkingSpot.getSpotType())
-                && parkingSpot.getVehicle() == null)
+                && parkingSpot.getVehicle() == null) {
+                System.out.println("Get Spot : " + parkingSpot.getSlotNumber() + " for vehicle :" + vehicle.getRegistrationNumber());
                 return parkingSpot;
+            }
         }
         throw new SpotNotFoundException();
     }

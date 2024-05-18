@@ -7,6 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import practice.parking_lot.enums.VehicleType;
 import practice.parking_lot.exception.InvalidInputException;
+import practice.parking_lot.exception.SpotNotFoundException;
 import practice.parking_lot.factory.ParkingStrategyFactory;
 import practice.parking_lot.model.Bike;
 import practice.parking_lot.model.Car;
@@ -27,7 +28,7 @@ public class MainApplication {
         parkingSpotDryRun();
     }
 
-    public static void parkingSpotDryRun() throws InvalidInputException {
+    public static void parkingSpotDryRun() throws InvalidInputException, SpotNotFoundException {
 
         ParkingService parkingService = new ParkingService();
         parkingService.createParkingLot(100,2,2);
@@ -41,11 +42,30 @@ public class MainApplication {
         ParkingStrategyFactory parkingStrategyFactory = new ParkingStrategyFactory();
         ParkingStrategy parkingStrategy = parkingStrategyFactory.getParkingStrategy("FCFS");
 
-        // TODO :: Assign Parking to Vehicles
+        System.out.println("Assign Parking to Vehicles");
+        parkingService.assignParkingSpot(car,parkingStrategy);
+        parkingService.assignParkingSpot(bike,parkingStrategy);
+        parkingService.assignParkingSpot(bike1,parkingStrategy);
+        System.out.println();
 
-        // TODO :: Check Slots of each vehicles
 
-        // TODO :: Un-assign few slots
+        System.out.println("Check Slots of each vehicles");
+        parkingService.getParkingSpot(car);
+        parkingService.getParkingSpot(bike);
+        parkingService.getParkingSpot(bike1);
+
+
+
+        System.out.println("Un-assign few slots");
+        parkingService.unAssignParkingSpot(car);
+        parkingService.unAssignParkingSpot(bike1);
+        System.out.println();
+
+        System.out.println("Check Slots of each vehicles");
+        parkingService.getParkingSpot(car);
+        parkingService.getParkingSpot(bike);
+        parkingService.getParkingSpot(bike1);
+        System.out.println();
     }
 
 

@@ -6,7 +6,7 @@ public class ParkingSpot {
 
     private final Long slotNumber;
     private Vehicle vehicle;
-    private VehicleType spotType;
+    private final VehicleType spotType;
 
     public ParkingSpot(final Long slotNumber,final VehicleType spotType) {
         this.slotNumber = slotNumber;

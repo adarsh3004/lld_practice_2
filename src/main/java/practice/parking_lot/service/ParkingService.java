@@ -5,7 +5,9 @@ import practice.parking_lot.exception.SpotNotFoundException;
 import practice.parking_lot.model.*;
 import practice.parking_lot.strategy.ParkingStrategy;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -15,17 +17,31 @@ public class ParkingService {
 
     public void createParkingLot(int capacity, int entryGateCount, int exitGateCount) {
 
-        List<ParkingSpot> parkingSpotList = IntStream.range(0, capacity/2).mapToObj(i -> new ParkingSpot((long)i + 1, VehicleType.TWO_WHEELER)).collect(Collectors.toList());
-        List<ParkingSpot> fourWheelerParkingSpot = IntStream.range(0, capacity/2).mapToObj(i -> new ParkingSpot((long) i + 1,VehicleType.TWO_WHEELER)).collect(Collectors.toList());
+        int j = 0;
+        List<ParkingSpot> parkingSpotList = new ArrayList<>();
+        int bound = capacity / 2;
+        for (int i1 = 0; i1 < bound; i1++) {
+            TwoWheelerSpot twoWheelerSpot = new TwoWheelerSpot((long)++j);
+            parkingSpotList.add(twoWheelerSpot);
+        }
+
+        List<ParkingSpot> fourWheelerParkingSpot = new ArrayList<>();
+        for (int i1 = 0; i1 < bound; i1++) {
+            FourWheelerSpot fourWheelerSpot = new FourWheelerSpot((long)++j);
+            fourWheelerParkingSpot.add(fourWheelerSpot);
+        }
+
         List<EntryGate> entryGates = IntStream.range(0, capacity).mapToObj(i -> new EntryGate((long) i + 1)).collect(Collectors.toList());
         List<ExitGate> exitGates = IntStream.range(0, exitGateCount).mapToObj(i -> new ExitGate((long) i + 1)).collect(Collectors.toList());
+
         parkingSpotList.addAll(fourWheelerParkingSpot);
         this.parkingLot = new ParkingLot(parkingSpotList,entryGates,exitGates);
     }
 
     public boolean assignParkingSpot(Vehicle vehicle, ParkingStrategy parkingStrategy) throws SpotNotFoundException {
 
-        parkingStrategy.park(vehicle,parkingLot);
+        ParkingSpot parkingSpot = parkingStrategy.park(vehicle,parkingLot);
+        parkingSpot.setVehicle(vehicle);
         return true;
     }
 
@@ -38,7 +54,13 @@ public class ParkingService {
     }
 
     public ParkingSpot getParkingSpot(Vehicle vehicle) {
-        return parkingLot.getParkingSpotList().stream().filter(parkingSpot -> vehicle.getRegistrationNumber().equals(parkingSpot.getVehicle().getRegistrationNumber())).findFirst().orElse(null);
+        for (ParkingSpot parkingSpot : parkingLot.getParkingSpotList()) {
+            if (Objects.nonNull(parkingSpot.getVehicle()) && vehicle.getRegistrationNumber().equals(parkingSpot.getVehicle().getRegistrationNumber())) {
+                System.out.println("For vehicle :" + vehicle.getRegistrationNumber() + " Parking Spot is = " + parkingSpot.getSlotNumber());
+                return parkingSpot;
+            }
+        }
+        return null;
     }
 
 }

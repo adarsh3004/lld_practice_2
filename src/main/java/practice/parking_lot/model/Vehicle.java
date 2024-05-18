@@ -4,9 +4,9 @@ import practice.parking_lot.enums.VehicleType;
 
 public class Vehicle {
 
-    private String registrationNumber;
+    private final String registrationNumber;
     private Long slotNumber;
-    private VehicleType vehicleType;
+    private final VehicleType vehicleType;
 
     public Vehicle(final String registrationNumber,final VehicleType vehicleType) {
         this.registrationNumber = registrationNumber;
