@@ -36,6 +36,9 @@ public class MainApplication {
     }
 
     public static void keyValueStoreRun() throws InvalidKeyException {
+
+        // TODO :: Make it thread safe
+
         KeyValueStoreService keyValueStoreService = new KeyValueStoreService();
 
         // Put
