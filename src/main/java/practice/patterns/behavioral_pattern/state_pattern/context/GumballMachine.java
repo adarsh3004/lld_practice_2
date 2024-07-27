@@ -26,6 +26,12 @@ public class GumballMachine {
         return this.state;
     }
 
+
+
+
+
+
+
     public int getCount() {
         return this.count;
     }
