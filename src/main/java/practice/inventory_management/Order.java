@@ -23,6 +23,7 @@ public class Order {
         boolean success = inventory.blockItem(item,quantity);
 
         if(success) {
+            System.out.println(LocalDateTime.now() + " : Ordering SUCCESSFUL For : " + quantity + " "+ item);
             Timer t = new Timer();
             t.schedule(new TimerTask() {
                 @Override
